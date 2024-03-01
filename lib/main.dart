@@ -59,23 +59,63 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ClipPath(
-        clipper: MyClipper(),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          height: 300,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color(0xFF3383CD),
-                Color(0xFF11249F),
-              ],
+      body: Column(
+        children: [
+          ClipPath(
+            clipper: TopClipper(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 300,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color(0xFF3383CD),
+                    Color(0xFF11249F),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+          Expanded(
+            child: Text(
+              'Gradient Color Test',
+              style: TextStyle(
+                fontSize: 40,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold,
+                foreground: Paint()
+                  ..shader = const LinearGradient(colors: <Color>[
+                    Colors.deepOrange,
+                    Colors.black,
+                    Colors.red,
+                  ]).createShader(
+                    const Rect.fromLTWH(10.0, 10, 400, 100),
+                  ),
+              ),
+            ),
+          ),
+          ClipPath(
+            clipper: BottomClipper(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 300,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color(0xFF3383CD),
+                    Color(0xFF11249F),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
